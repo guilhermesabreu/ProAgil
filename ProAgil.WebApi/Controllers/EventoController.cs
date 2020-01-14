@@ -61,8 +61,8 @@ namespace ProAgil.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Evento model)
-        {
+        public async Task<IActionResult> Post(Evento model) 
+        { 
             try
             {
               _repo.Add(model);
@@ -78,7 +78,7 @@ namespace ProAgil.WebApi.Controllers
             }
             return BadRequest();            
         }
-
+        
         [HttpPut]
         public async Task<IActionResult> Put(int EventoId, Evento model)
         {
