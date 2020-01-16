@@ -28,6 +28,6 @@ constructor(private http: HttpClient) { }
   }
 
   putEvento(evento: Evento) {
-    return this.http.put(this.baseURL, evento);
+    return this.http.put(`${this.baseURL}/${evento.id}`, evento);
   }
 }
