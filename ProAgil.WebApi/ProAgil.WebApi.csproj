@@ -9,6 +9,7 @@
     <PackageReference Include="Microsoft.AspNetCore.App"/>
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.1"/>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.1"/>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="4.0.0"/>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProAgil.Domain\ProAgil.Domain.csproj"/>
