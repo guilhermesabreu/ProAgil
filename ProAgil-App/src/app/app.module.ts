@@ -13,6 +13,7 @@ import { PalestrantesComponent } from './palestrantes/palestrantes.component';
 import { EventosComponent } from './eventos/eventos.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ContatosComponent } from './contatos/contatos.component';
+import { TituloComponent } from './_shared/titulo/titulo.component';
 
 import { DateTimeFormatPipePipe } from './_helps/DateTimeFormatPipe.pipe';
 
@@ -24,7 +25,8 @@ import { DateTimeFormatPipePipe } from './_helps/DateTimeFormatPipe.pipe';
       DateTimeFormatPipePipe,
       PalestrantesComponent,
       DashboardComponent,
-      ContatosComponent
+      ContatosComponent,
+      TituloComponent
    ],
    imports: [
       BrowserModule,

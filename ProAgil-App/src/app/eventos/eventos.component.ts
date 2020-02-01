@@ -11,6 +11,8 @@ import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms'
 })
 
 export class EventosComponent implements OnInit {
+
+  titulo = 'Eventos';
   eventosFiltrados: Evento[];
   eventos: Evento[];
   evento: Evento;
