@@ -8,8 +8,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EventoService } from './_services/Evento.service';
 
 import { AppComponent } from './app.component';
-import { EventosComponent } from './eventos/eventos.component';
 import { NavComponent } from './nav/nav.component';
+import { PalestrantesComponent } from './palestrantes/palestrantes.component';
+import { EventosComponent } from './eventos/eventos.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ContatosComponent } from './contatos/contatos.component';
 
 import { DateTimeFormatPipePipe } from './_helps/DateTimeFormatPipe.pipe';
 
@@ -18,7 +21,10 @@ import { DateTimeFormatPipePipe } from './_helps/DateTimeFormatPipe.pipe';
       AppComponent,
       EventosComponent,
       NavComponent,
-      DateTimeFormatPipePipe
+      DateTimeFormatPipePipe,
+      PalestrantesComponent,
+      DashboardComponent,
+      ContatosComponent
    ],
    imports: [
       BrowserModule,
@@ -31,7 +37,11 @@ import { DateTimeFormatPipePipe } from './_helps/DateTimeFormatPipe.pipe';
       FormsModule,
       ReactiveFormsModule
    ],
-   providers: [EventoService],
-   bootstrap: [AppComponent]
+   providers: [
+      EventoService
+   ],
+   bootstrap: [
+      AppComponent
+   ]
 })
 export class AppModule { }
