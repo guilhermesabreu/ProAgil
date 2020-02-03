@@ -39,7 +39,7 @@
   <tbody *ngIf="eventos && eventos.length">
     <tr *ngFor="let evento of eventosFiltrados">      
       <td> 
-        <img *ngIf="mostrarImagem" src="http://localhost:5000/img/{{evento.imagemURL}}"
+        <img *ngIf="mostrarImagem" src="http://localhost:5000/resources/images/{{evento.imagemURL}}"
         [style.width.px]="imagemLargura"
         [style.margin.px]="imagemMargem">
       </td>
@@ -143,8 +143,10 @@ role="dialog" aria-labelledby="dialog-sizes-name1">
       </div>
       <div class="form-group col-md-9">
         <label>Imagem</label>
-        <input type="text" class="form-control" placeholder="insira a URL da Imagem" formControlName="imagemURL"
-        [ngClass]="{'is-invalid': registerForm.get('imagemURL').errors && registerForm.get('imagemURL').touched}">
+        <button class="btn btn-success" (click)="file.click()"></button>
+        <input type="file" class="form-control is-invalid" placeholder="insira a URL da Imagem" formControlName="imagemURL"
+        [ngClass]="{'is-invalid': registerForm.get('imagemURL').errors && registerForm.get('imagemURL').touched}"
+        (change)="onFileChange($event)">
         <div *ngIf="registerForm.get('imagemURL').hasError('required') && registerForm.get('imagemURL').touched" 
         class="invalid-feedback">
         A URL é obrigatória
