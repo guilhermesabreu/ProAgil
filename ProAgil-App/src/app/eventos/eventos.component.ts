@@ -23,6 +23,7 @@ export class EventosComponent implements OnInit {
   registerForm: FormGroup;
   modoSalvar = 'post';
   bodyDeletarEvento = '';
+  file: File;
 
   constructor(
     private eventoService: EventoService
@@ -97,6 +98,15 @@ export class EventosComponent implements OnInit {
          telefone: ['', Validators.required],
          email: ['', [Validators.required, Validators.email]]
       });
+    }
+
+    onFileChange(event) {
+      const reader = new FileReader();
+
+      if(event.target.files && event.target.files.length) {
+        this.file = event.target.files;
+        console.log(this.file);
+      }
     }
 
     salvarAlteracoes(template: any) {

@@ -36,7 +36,7 @@
       <th>Opções</th>
     </tr>
   </thead>
-  <tbody *ngIf="eventos && eventos.length">
+  <tbody *ngIf="eventos.length">
     <tr *ngFor="let evento of eventosFiltrados">      
       <td> 
         <img *ngIf="mostrarImagem" src="http://localhost:5000/resources/images/{{evento.imagemURL}}"
@@ -46,7 +46,7 @@
       <td>{{evento.id}}</td>
       <td>{{evento.tema}}</td>
       <td>{{evento.local}}</td>
-      <td>{{evento.dataEvento | DateTimeFormatPipe}}</td>
+      <td>{{evento.dataEvento}}</td>
       <td>{{evento.qtdPessoas}}</td>
       <td>
         <div *ngIf="!evento.lotes.length">
@@ -143,10 +143,20 @@ role="dialog" aria-labelledby="dialog-sizes-name1">
       </div>
       <div class="form-group col-md-9">
         <label>Imagem</label>
-        <button class="btn btn-success" (click)="file.click()"></button>
-        <input type="file" class="form-control is-invalid" placeholder="insira a URL da Imagem" formControlName="imagemURL"
-        [ngClass]="{'is-invalid': registerForm.get('imagemURL').errors && registerForm.get('imagemURL').touched}"
-        (change)="onFileChange($event)">
+        <table>
+          <tr>
+            <td>
+              <button class="btn btn-success" (click)="file.click()">
+                Enviar Imagem
+                </button>
+                <input type="file" class="form-control is-invalid" placeholder="insira a URL da Imagem" formControlName="imagemURL"
+                #file [ngClass]="{'is-invalid': registerForm.get('imagemURL').errors && registerForm.get('imagemURL').touched}"
+                (change)="onFileChange($event)"
+                style="display: none;">
+            </td>
+          </tr>
+        </table>
+        
         <div *ngIf="registerForm.get('imagemURL').hasError('required') && registerForm.get('imagemURL').touched" 
         class="invalid-feedback">
         A URL é obrigatória
