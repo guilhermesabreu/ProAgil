@@ -99,7 +99,8 @@ namespace ProAgil.WebApi
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            app.UseAuthentication();
+            //app.UseHttpsRedirection();
             //Define política de acessos de outros domínios, fazendo bloquear qualquer domínio exceto o da própria aplicação
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseStaticFiles();

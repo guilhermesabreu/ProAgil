@@ -1,12 +1,17 @@
 using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using ProAgil.Domain.Identity;
 using ProAgil.WebApi.Dtos;
 
@@ -33,9 +38,10 @@ namespace ProAgil.WebApi.Controllers
         }
 
         [HttpGet("GetUser")]
-        public async Task<IActionResult> GetUser(UserDto userDto)
+        [AllowAnonymous]
+        public async Task<IActionResult> GetUser()
         {
-            return Ok(userDto);
+            return Ok(new UserDto());
         }
 
         [HttpPost("Register")]
@@ -89,7 +95,7 @@ namespace ProAgil.WebApi.Controllers
             }
         }
 
-        private async Task<string> GenerateJWToken(User appUser)
+        private async Task<string> GenerateJWToken(User user)
         {
             var claims = new List<Claim>
             {
@@ -105,7 +111,7 @@ namespace ProAgil.WebApi.Controllers
             }
 
             var key = new SymmetricSecurityKey(Encoding.ASCII
-                    .GetBytes(_config.GetSection("AppSettings:Token").value));
+                    .GetBytes(_config.GetSection("AppSettings:Token").Value));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
