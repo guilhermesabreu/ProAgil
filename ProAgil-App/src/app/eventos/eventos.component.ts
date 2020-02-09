@@ -141,14 +141,14 @@ export class EventosComponent implements OnInit {
       if (this.registerForm.valid) {
         if (this.modoSalvar === 'post') {
           this.evento = Object.assign({}, this.registerForm.value);
-          
+
           this.uploadImagem();
           this.eventoService.postEvento(this.evento).subscribe(
                (novoEvento: Evento) => {
                  template.hide();
                  this.getEventos();
                }, error => {
-                 console.log(error);
+                console.log(error);
                }
           );
         } else if(this.modoSalvar === 'put') {
@@ -160,7 +160,7 @@ export class EventosComponent implements OnInit {
                  template.hide();
                  this.getEventos();
                }, error => {
-                 console.log(error);
+                console.log(error);
                }
           );
         }
