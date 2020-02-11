@@ -3,6 +3,7 @@ import { EventoService } from '../_services/Evento.service';
 import { Evento } from '../_models/Evento';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-eventos',
@@ -30,7 +31,9 @@ export class EventosComponent implements OnInit {
   constructor(
     private eventoService: EventoService
   , private modalService: BsModalService
-  , private fb: FormBuilder) { }
+  , private fb: FormBuilder
+  , private toastr: ToastrService
+  ) {}
 
   get filtroLista(): string {
     return this._filtroLista;
@@ -146,8 +149,10 @@ export class EventosComponent implements OnInit {
           this.eventoService.postEvento(this.evento).subscribe(
                (novoEvento: Evento) => {
                  template.hide();
+                 this.toastr.success('Salvo com sucesso !!!');
                  this.getEventos();
                }, error => {
+                this.toastr.error('Erro ao salvar !!!');
                 console.log(error);
                }
           );
@@ -158,8 +163,10 @@ export class EventosComponent implements OnInit {
           this.eventoService.putEvento(this.evento).subscribe(
                () => {
                  template.hide();
+                 this.toastr.success('Editado com sucesso !!!');
                  this.getEventos();
                }, error => {
+                this.toastr.error('Erro ao editar !!!');
                 console.log(error);
                }
           );
