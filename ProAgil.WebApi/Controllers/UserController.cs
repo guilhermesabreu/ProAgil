@@ -44,9 +44,9 @@ namespace ProAgil.WebApi.Controllers
             return Ok(new UserDto());
         }
 
-        [HttpPost("Register")]
+        [HttpPost("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register(UserDto userDto)
+        public async Task<IActionResult> register(UserDto userDto)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace ProAgil.WebApi.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco de Dados Falhou {ex.Message}");
             }  
         }
-
+         
         [HttpPost("Login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login(UserLoginDto userLogin)

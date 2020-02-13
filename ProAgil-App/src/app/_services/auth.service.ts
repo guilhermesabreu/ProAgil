@@ -8,29 +8,31 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
 
-baseURL = 'http://localhost:5000/api/user/';
+  baseURL = 'http://localhost:5000/api/user/';
+  jwtHelper = new JwtHelperService();
+  decodedToken: any;
 
-constructor(private http: HttpClient) { }
-jwtHelper = new JwtHelperService(); 
-decodedToken: any;
+  constructor(private http: HttpClient) { }
 
-  login(model: any){
-     return this.http.post(`${this.baseURL}login`, model)
-     .pipe(map((response: any) => {
-        const user = response;
-        if(user) {
-          localStorage.setItem('token', user.token);
-          this.decodedToken = this.jwtHelper.decodeToken(user.token);
-        }
-     })
-     );
+  login(model: any) {
+    return this.http
+      .post(`${this.baseURL}login`, model).pipe(
+        map((response: any) => {
+          const user = response;
+          if (user) {
+            localStorage.setItem('token', user.token);
+            this.decodedToken = this.jwtHelper.decodeToken(user.token);
+            sessionStorage.setItem('username', this.decodedToken.unique_name);
+          }
+        })
+      );
   }
 
-  register(model: any){
-    return this.http.post(`${this.baseURL}login`, model);
+  register(model: any) {
+    return this.http.post(`${this.baseURL}register`, model);
   }
 
-  loggedIn(){
+  loggedIn() {
     const token = localStorage.getItem('token');
     return !this.jwtHelper.isTokenExpired(token);
   }
