@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { PalestrantesComponent } from './palestrantes/palestrantes.component';
 import { EventosComponent } from './eventos/eventos.component';
+import { EventoEditComponent } from './eventos/eventoEdit/eventoEdit.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ContatosComponent } from './contatos/contatos.component';
 import { TituloComponent } from './_shared/titulo/titulo.component';
@@ -26,6 +27,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
    declarations: [
       AppComponent,
       EventosComponent,
+      EventoEditComponent,
       NavComponent,
       DateTimeFormatPipePipe,
       PalestrantesComponent,
