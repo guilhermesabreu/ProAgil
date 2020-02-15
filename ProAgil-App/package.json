@@ -24,6 +24,7 @@
     "bootstrap": "^4.4.1",
     "install": "^0.13.0",
     "ngx-bootstrap": "^5.2.0",
+    "ngx-mask": "^8.1.7",
     "ngx-toastr": "^11.3.3",
     "npm": "^6.13.7",
     "rxjs": "~6.4.0",

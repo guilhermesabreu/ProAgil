@@ -88,8 +88,8 @@
         </tab>
         <tab heading="Lotes">
           <div>
-            <div >
-              <fieldset class="form-group">
+            <div formArrayName="lotes" *ngFor=" let lote of this.registerForm.get('lotes').value; let i=index">
+              <fieldset [formGroupName]="i" class="form-group">
                 <legend class="d-flex justify-content-between capitalize">
                   {{'Lotes'}}
                   <button class="btn btn-sm btn-warning mb-1">remove</button>
@@ -115,7 +115,6 @@
                     <label>Data Fim</label>
                     <input type="text" class="form-control" formControlName="dataFim" placeholder="01/01/2019">
                   </div>
-                  
                 </div>
               </fieldset>
             </div>
@@ -125,8 +124,8 @@
           </div>
         </tab>
         <tab heading="Redes Sociais">
-          <div>
-            <fieldset class="form-group">
+          <div formArrayName="redesSociais" *ngFor=" let lote of this.registerForm.get('redesSociais').value; let i=index">
+            <fieldset [formGroupName]="i" class="form-group">
               <legend class="d-flex justify-content-between capitalize">
                 <button class="btn btn-sm btn-warning mb-1"
                   >remove</button>
@@ -172,7 +171,7 @@
     <div class="col-md-4">
       <div class="form-row">
         <div class="form-group col-md-9">
-          <input type="file" #file (change)="onFileChange($event)" class="form-control is-invalid"
+          <input type="file" #file (change)="onFileChange($event.target.files)" class="form-control is-invalid"
             formControlName="imagemURL" placeholder="" style="display: none">
         </div>
       </div>
