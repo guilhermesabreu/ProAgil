@@ -88,11 +88,11 @@
         </tab>
         <tab heading="Lotes">
           <div>
-            <div formArrayName="lotes" *ngFor=" let lote of this.registerForm.get('lotes').value; let i=index">
+            <div formArrayName="lotes" *ngFor=" let lote of lotes.controls; let i=index">
               <fieldset [formGroupName]="i" class="form-group">
                 <legend class="d-flex justify-content-between capitalize">
                   {{'Lotes'}}
-                  <button class="btn btn-sm btn-warning mb-1">remove</button>
+                  <button (click)="removerLote(i)" class="btn btn-sm btn-warning mb-1">remove</button>
                 </legend>
                 <div class="row">
                   <div class="form-group col-md-4">
@@ -118,16 +118,16 @@
                 </div>
               </fieldset>
             </div>
-            <button class="btn btn-outline-primary">
+            <button (click)="adcionarLote()" class="btn btn-outline-primary">
               Adicionar Lote
             </button>
           </div>
         </tab>
         <tab heading="Redes Sociais">
-          <div formArrayName="redesSociais" *ngFor=" let lote of this.registerForm.get('redesSociais').value; let i=index">
+          <div formArrayName="redesSociais" *ngFor=" let lote of redesSociais.controls; let i=index">
             <fieldset [formGroupName]="i" class="form-group">
               <legend class="d-flex justify-content-between capitalize">
-                <button class="btn btn-sm btn-warning mb-1"
+                <button (click)="removerRedeSocial(i)" class="btn btn-sm btn-warning mb-1"
                   >remove</button>
               </legend>
               <div class="row">
@@ -155,7 +155,7 @@
               </div>
             </fieldset>
           </div>
-          <button class="btn btn-outline-primary">
+          <button (click)="adcionarRedeSocial()" class="btn btn-outline-primary">
             Adicionar Rede Social
           </button>
         </tab>

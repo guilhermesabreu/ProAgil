@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { EventoService } from 'src/app/_services/evento.service';
-import { BsModalService, BsLocaleService } from 'ngx-bootstrap';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BsLocaleService } from 'ngx-bootstrap';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Evento } from 'src/app/_models/Evento';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-evento-edit',
@@ -11,24 +12,50 @@ import { Evento } from 'src/app/_models/Evento';
   styleUrls: ['./eventoEdit.component.css']
 })
 export class EventoEditComponent implements OnInit {
-
+  
   titulo = 'Editar Evento';
   evento: Evento = new Evento();
   imagemURL = 'assets/img/upload.png';
   registerForm: FormGroup;
+  file: File;
+  fileNameToUpdate: string;
+  dataAtual: any;
+
+  get lotes(): FormArray {
+    return <FormArray>this.registerForm.get('lotes');
+  }
+
+  get redesSociais(): FormArray {
+    return <FormArray>this.registerForm.get('redesSociais');
+  }
 
   constructor(
     private eventoService: EventoService
-    , private modalService: BsModalService
     , private fb: FormBuilder
     , private localeService: BsLocaleService
     , private toastr: ToastrService
+    , private router: ActivatedRoute
   ) {
     this.localeService.use('pt-br');
   }
 
   ngOnInit() {
     this.validation();
+    this.carregarEvento();
+  }
+
+  carregarEvento() {
+    const idEvento = +this.router.snapshot.paramMap.get('id');
+    this.eventoService.getEventoById(idEvento)
+         .subscribe(
+           (evento: Evento) => {
+            this.evento = Object.assign({}, evento);
+            this.fileNameToUpdate = evento.imagemURL.toString();
+            this.imagemURL = `http://localhost:5000/resources/images/${this.evento.imagemURL}?_ts=${this.dataAtual}`
+            this.evento.imagemURL = '';
+            this.registerForm.patchValue(this.evento);
+           }
+         );
   }
 
   validation() {
@@ -60,6 +87,22 @@ export class EventoEditComponent implements OnInit {
       nome: ['', Validators.required],
       url: ['', Validators.required]
     });
+  }
+
+  adcionarLote() {
+    this.lotes.push(this.criaLote());
+  }
+
+  adcionarRedeSocial() {
+    this.redesSociais.push(this.criaRedesSocial());
+  }
+
+  removerLote(id: number) {
+    this.lotes.removeAt(id);
+  }
+
+  removerRedeSocial(id: number) {
+    this.redesSociais.removeAt(id);
   }
 
   onFileChange(file: FileList){
