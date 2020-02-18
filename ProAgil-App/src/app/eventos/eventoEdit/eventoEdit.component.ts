@@ -66,7 +66,7 @@ export class EventoEditComponent implements OnInit {
           });
         }
       );
-  }
+   }
 
   validation() {
     this.registerForm = this.fb.group({
