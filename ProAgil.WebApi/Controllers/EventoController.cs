@@ -131,27 +131,25 @@ namespace ProAgil.WebApi.Controllers
         {
             try
             {
+              var evento = await _repo.GetEventoAsyncById(EventoId, false);
+              if(evento == null) return NotFound();
 
               var idLotes = new List<int>();
               var idRedesSociais = new List<int>();
 
-              foreach (var itemL in model.Lotes)
-                    idLotes.Add(itemL.Id);
+              model.Lotes.ForEach(item => idLotes.Add(item.Id));
+              model.RedesSociais.ForEach(item => idRedesSociais.Add(item.Id));
 
-              foreach (var itemR in model.RedesSociais)
-                    idRedesSociais.Add(itemR.Id);
-
-              var evento = await _repo.GetEventoAsyncById(EventoId, false);
-              if(evento == null) return NotFound();
               
-              var lotes = evento.Lotes.Where(lote => !idLotes.Contains(lote.Id)).ToList<Lote>();  
-              var redesSociais = evento.RedesSociais.Where(redeSocial => !idRedesSociais.Contains(redeSocial.Id)).ToList<RedeSocial>();
+              var lotes = evento.Lotes.Where(
+                  lote => !idLotes.Contains(lote.Id)).ToArray();
 
-              if(lotes.Count > 0)
-                    lotes.ForEach(lote => _repo.Delete(lote));
+              var redesSociais = evento.RedesSociais.Where(
+                  redeSocial => !idRedesSociais.Contains(redeSocial.Id)).ToArray();
+
+              if(lotes.Length > 0)  _repo.DeleteRange(lotes);
              
-              if(redesSociais.Count > 0)
-                    redesSociais.ForEach(rede => _repo.Delete(rede));
+              if(redesSociais.Length > 0)  _repo.DeleteRange(redesSociais);
               
              _mapper.Map(model, evento);
 

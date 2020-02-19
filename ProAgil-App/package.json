@@ -24,6 +24,7 @@
     "bootstrap": "^4.4.1",
     "install": "^0.13.0",
     "ngx-bootstrap": "^5.2.0",
+    "ngx-currency": "^2.2.2",
     "ngx-mask": "^8.1.7",
     "ngx-toastr": "^11.3.3",
     "npm": "^6.13.7",

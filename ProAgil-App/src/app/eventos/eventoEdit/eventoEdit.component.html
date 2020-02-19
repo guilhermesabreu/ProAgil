@@ -113,6 +113,8 @@
                   <div class="form-group col-md-4">
                     <label>Preço</label>
                     <input type="text"
+                      currencyMask
+                      [options]="{prefix: 'R$ ', thousands: '.', decimal: '.', align: 'left'}"
                       class="form-control"
                       [ngClass]="{'is-invalid': lotes.get(i+'.preco').errors && lotes.get(i+'.preco').touched}"
                       formControlName="preco" placeholder="R$ 0,00">

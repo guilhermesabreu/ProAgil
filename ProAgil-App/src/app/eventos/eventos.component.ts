@@ -50,15 +50,15 @@ export class EventosComponent implements OnInit {
   }
   set filtroLista(value: string) {
     this._filtroLista = value;
-    this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;    
+    this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
   }
 
   // Sugestão do Aluno Kelvi Martins Ribeiro
   filtrarEventos(filtrarPor: string) { 
     filtrarPor = filtrarPor.toLocaleLowerCase() 
-    return this.eventos.filter(evento => { 
+    return this.eventos.filter(evento => {
       return evento.tema.toLocaleLowerCase().includes(filtrarPor) 
-    }) 
+    })
   }
   
   // // Sugestão do Aluno Pablo Ferreira

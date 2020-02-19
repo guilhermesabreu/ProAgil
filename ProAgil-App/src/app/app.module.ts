@@ -8,6 +8,7 @@ import { EventoService } from './_services/Evento.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxMaskModule } from 'ngx-mask';
+import { NgxCurrencyModule } from 'ngx-currency';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -48,6 +49,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
       ToastrModule.forRoot(),
       TabsModule.forRoot(),
       NgxMaskModule.forRoot(),
+      NgxCurrencyModule,
       BrowserAnimationsModule,
       AppRoutingModule,
       HttpClientModule,
